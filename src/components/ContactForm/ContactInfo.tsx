@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Github, Linkedin, Twitter } from 'lucide-react';
 
 interface ContactItemProps {
   icon: React.ReactNode;
@@ -15,6 +15,25 @@ const ContactItem = ({ icon, title, content }: ContactItemProps) => (
       <p className="text-gray-600">{content}</p>
     </div>
   </div>
+);
+
+interface SocialLinkProps {
+  href: string;
+  icon: React.ReactNode;
+  label: string;
+}
+
+const SocialLink = ({ href, icon, label }: SocialLinkProps) => (
+  <a
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="flex items-center gap-2 px-4 py-2 text-sm text-purple-600 border border-purple-600 rounded-lg
+             hover:bg-purple-600 hover:text-white transition-colors"
+  >
+    {icon}
+    <span>{label}</span>
+  </a>
 );
 
 export const ContactInfo = () => {
@@ -50,17 +69,22 @@ export const ContactInfo = () => {
 
       <div className="mt-8 pt-8 border-t border-gray-200">
         <h4 className="text-lg font-semibold text-gray-900 mb-4">Sígueme en redes</h4>
-        <div className="flex space-x-4">
-          {['LinkedIn', 'GitHub', 'Twitter'].map((network) => (
-            <a
-              key={network}
-              href="#"
-              className="px-4 py-2 text-sm text-purple-600 border border-purple-600 rounded-lg
-                       hover:bg-purple-600 hover:text-white transition-colors"
-            >
-              {network}
-            </a>
-          ))}
+        <div className="flex flex-col space-y-3">
+          <SocialLink
+            href="https://www.linkedin.com/in/henry-steven-jaimes/"
+            icon={<Linkedin className="w-4 h-4" />}
+            label="LinkedIn"
+          />
+          <SocialLink
+            href="https://github.com/stevenjaimes"
+            icon={<Github className="w-4 h-4" />}
+            label="GitHub"
+          />
+          <SocialLink
+            href="https://x.com/steevenjaimes?t=AJFAd8AoOwPSBgftxGvbHQ&s=09"
+            icon={<Twitter className="w-4 h-4" />}
+            label="Twitter"
+          />
         </div>
       </div>
     </div>
