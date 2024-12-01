@@ -1,0 +1,51 @@
+[
+  {
+    "path": "/imagenes-creadas",
+    "name": "Imágenes creadas",    
+    "showInMenu": true
+  },
+  {
+    "path": "/stable-diffusion",
+    "modelUrl": "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-3.5-large",
+    "name": "Stable Diffusion v3.5",
+    "timeout": 400,
+    "showInMenu": true,
+    "date": "2024-09-01"
+  },
+  {
+    "path": "/black-forest-labs",
+    "modelUrl": "https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-schnell",
+    "name": "Black Forest Labs",
+    "timeout": 2000,
+    "showInMenu": true,
+    "date": "2022-06-01"
+  },
+  {
+    "path": "/realvisxl",
+    "modelUrl": "https://api-inference.huggingface.co/models/SG161222/RealVisXL_V4.0",
+    "name": "RealVisXL",
+    "timeout": 2000,
+    "showInMenu": true,
+    "date": "2022-06-01"
+  },
+  
+  {
+    "path": "/In-Context-LoRA",
+    "modelUrl": "https://api-inference.huggingface.co/models/ali-vilab/In-Context-LoRA",
+    "name": "IC-LoRA",
+    "timeout": 3000,
+    "showInMenu": true,
+    "date": "2024-11-01"
+  },
+  {
+    "path": "/shakker-labs",
+    "modelUrl": "https://api-inference.huggingface.co/models/Shakker-Labs/FLUX.1-dev-LoRA-AntiBlur",
+    "name": "Shakker Labs",
+    "timeout": 3000,
+    "showInMenu": true,
+    "date": "2024-11-01"
+  }
+]
+
+
+
