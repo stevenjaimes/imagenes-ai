@@ -1,12 +1,23 @@
-import React from 'react';
 import {  useState, useEffect } from 'react';
 import axios from 'axios';
 import { Wand2, Loader2, Image as ImageIcon } from 'lucide-react';
 import { initializeDB, saveImageToDB } from "../config/indexedDBUtils";
 import { ImageGeneratorProps } from '../types/types';
-import type { NodeJS } from 'node'; 
 
 
+/**
+ * Componente que permite al usuario generar una imagen con una
+ * descripción. Utiliza el API de Hugging Face para generar la imagen.
+ * El componente se encarga de almacenar la imagen generada en IndexedDB
+ * y mostrarla al usuario.
+ *
+ * @param {ImageGeneratorProps} props - Propiedades del componente.
+ * @param {string} props.modelUrl - URL del modelo de IA.
+ * @param {string} props.name - Nombre del modelo de IA.
+ * @param {number} props.timeout - Tiempo de espera en milisegundos entre
+ * cada actualización del progreso.
+ * @returns {JSX.Element} El componente de generación de imágenes.
+ */
 const ImageGenerator = ({ modelUrl, name, timeout }: ImageGeneratorProps) => {
   const [prompt, setPrompt] = useState('');
   const [image, setImage] = useState<string | null>(null);
@@ -32,6 +43,34 @@ const ImageGenerator = ({ modelUrl, name, timeout }: ImageGeneratorProps) => {
     };
   }, [isLoading, progress, timeout]);
 
+  const convertBlobToWebP = (blob: Blob): Promise<Blob> => {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.src = URL.createObjectURL(blob);
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        const ctx = canvas.getContext("2d");
+        if (ctx) {
+          ctx.drawImage(img, 0, 0);
+          canvas.toBlob((webpBlob) => {
+            if (webpBlob) {
+              resolve(webpBlob);
+            } else {
+              reject(new Error("Error converting to WebP"));
+            }
+          }, "image/webp");
+        } else {
+          reject(new Error("Error getting canvas context"));
+        }
+      };
+      img.onerror = () => {
+        reject(new Error("Error loading image"));
+      };
+    });
+  };
+
   const generateImage = async () => {
     if (!prompt.trim()) {
       setError('Por favor, ingresa una descripción para generar la imagen.');
@@ -55,11 +94,12 @@ const ImageGenerator = ({ modelUrl, name, timeout }: ImageGeneratorProps) => {
         }
       );
 
-      const imageUrl = URL.createObjectURL(response.data);
+      const webpBlob = await convertBlobToWebP(response.data);
+      const imageUrl = URL.createObjectURL(webpBlob);
       setImage(imageUrl);
 
       const id = new Date().toISOString();
-      await saveImageToDB(id, response.data);
+      await saveImageToDB(id, webpBlob);
     } catch (err) {
       console.error('Error generando la imagen:', err);
       setError('Hubo un error al generar la imagen. Por favor, intenta de nuevo.');

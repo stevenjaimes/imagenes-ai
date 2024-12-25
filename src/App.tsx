@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -13,7 +12,16 @@ import ContactForm from './components/ContactForm/ContactForm';
 import TermsAndConditions from './components/TermsAndConditions/TermnsAndConditions';
 
 
-const App = () => {
+/**
+ * Componente principal de la aplicación.
+ *
+ * Renderiza la interfaz principal y los componentes que se
+ * encuentran en ella.
+ *
+ * @returns {React.ReactElement} Un elemento JSX que representa
+ * la interfaz principal de la aplicación.
+ */
+const App = (): React.ReactElement => {
   return (
     <Router>
       <div className="flex flex-col min-h-screen">

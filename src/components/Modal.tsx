@@ -8,6 +8,23 @@ interface ModalProps {
   children: React.ReactNode;
 }
 
+/**
+ * A modal component that displays content in a portal overlay.
+ * 
+ * @component
+ * @param {Object} props - The props for the Modal component.
+ * @param {boolean} props.isOpen - Determines if the modal is open and visible.
+ * @param {function} props.onClose - Function to call when the modal should be closed.
+ * @param {React.ReactNode} props.children - The content to be displayed within the modal.
+ * 
+ * @returns {JSX.Element | null} A JSX element for the modal or null if `isOpen` is false.
+ * 
+ * When the modal is open, it prevents body scrolling by setting `document.body.style.overflow` 
+ * to 'hidden'. It reverts back to 'unset' when closed. The modal content appears centered 
+ * on the screen with a backdrop overlay, and clicking outside the modal content or on the 
+ * close button will trigger the `onClose` function.
+ */
+
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   useEffect(() => {
     if (isOpen) {

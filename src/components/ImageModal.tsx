@@ -11,6 +11,9 @@ interface ImageModalProps {
   onDelete: (imageId: string) => void;
 }
 
+
+/* quiero que documente las props no los tipos de datos */
+
 const ImageModal: React.FC<ImageModalProps> = ({
   image,
   isOpen,

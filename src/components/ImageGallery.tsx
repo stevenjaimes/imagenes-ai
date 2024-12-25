@@ -7,15 +7,33 @@ import { StoredImage, CustomImageData } from "../types/types";
 // Cache global de URLs
 const imageCache = new Map<string, string>();
 
-const ImageGallery = () => {
+
+
+/**
+ * Componente que muestra una galería de imágenes generadas por el usuario.
+ * Utiliza IndexedDB para almacenar las imágenes y crear URLs solo si no se han
+ * creado aún en la caché. El componente se encarga de eliminar las URL de la
+ * caché cuando se desmonta.
+ *
+ * @returns {JSX.Element} El componente de la galería de imágenes.
+ */
+const ImageGallery = (): React.ReactElement => {
   const [images, setImages] = useState<CustomImageData[]>([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState<CustomImageData | null>(null);
-
+  
+  /**
+   * Efecto que se encarga de:
+   * 1. Cargar las imágenes de IndexedDB
+   * 2. Crear URLs solo si no se han creado aún en la caché
+   * 3. Agregar las imágenes a la lista de imágenes
+   * 4. Limpiar las URLs de la caché cuando el componente se desmonte
+   */
   useEffect(() => {
     const fetchImages = async () => {
       try {
         const storedImages = await getImagesFromDB();
+       
 
         // Mapear las imágenes y crear las URLs solo si no se han creado aún en la caché
         const imageData = storedImages.map((record: StoredImage) => {
@@ -23,8 +41,10 @@ const ImageGallery = () => {
 
           // Si la URL no está en caché, crearla y agregarla
           if (!url) {
+            console.log("url no esta en cache");
             url = URL.createObjectURL(record.blob);
             imageCache.set(record.id, url);
+
           }
 
           return {
@@ -34,6 +54,7 @@ const ImageGallery = () => {
         });
 
         setImages(imageData);
+
       } catch (err) {
         console.error("Error al cargar imágenes de IndexedDB:", err);
       }
@@ -41,25 +62,33 @@ const ImageGallery = () => {
 
     fetchImages();
 
-    return () => {
-      // Limpiar URLs de la caché cuando el componente se desmonte
-      imageCache.forEach((url) => {
-        URL.revokeObjectURL(url);
-      });
-      imageCache.clear();
-    };
+    // No limpiar la caché de URLs cuando el componente se desmonte
   }, []); // La dependencia vacía asegura que esto solo se ejecute una vez
+
+  
+  /**
+   * Abre el modal con la imagen seleccionada.
+   * @param {CustomImageData} image Imagen a mostrar en el modal.
+   */
 
   const openModal = (image: CustomImageData) => {
     setCurrentImage(image);
     setModalOpen(true);
   };
 
+  
+  /**
+   * Cierra el modal y borra la imagen seleccionada.
+   */
   const closeModal = () => {
     setModalOpen(false);
     setCurrentImage(null);
   };
 
+  /**
+   * Descarga la imagen seleccionada en el disco local.
+   * @param {CustomImageData} image Imagen a descargar.
+   */
   const downloadImage = (image: CustomImageData) => {
     const link = document.createElement("a");
     link.href = image.url;
@@ -67,6 +96,11 @@ const ImageGallery = () => {
     link.click();
   };
 
+  /**
+   * Elimina una imagen de la base de datos y de la caché de URLs.
+   * Luego, actualiza el estado eliminando la imagen y cierra el modal.
+   * @param {string} imageId ID de la imagen a eliminar.
+   */
   const handleDelete = async (imageId: string) => {
     try {
       await deleteImageFromDB(imageId);
@@ -85,6 +119,7 @@ const ImageGallery = () => {
       console.error("Error al eliminar la imagen:", err);
     }
   };
+
 
   return (
     <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-8 border border-purple-100">

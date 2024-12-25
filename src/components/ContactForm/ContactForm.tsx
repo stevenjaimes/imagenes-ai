@@ -132,7 +132,7 @@ const ContactForm = () => {
                   ) : (
                     <>
                       <Send className="w-5 h-5" />
-                      <span>Enviar mensaje</span>
+                      <span>Enviar mensaje</span>                      
                     </>
                   )}
                 </button>

@@ -4,23 +4,35 @@ import { Sparkles, Image as ImageIcon, Menu, X, ChevronDown } from 'lucide-react
 import modelConfigs from '../config/models.json';
 
 
+/**
+ * Componente que renderiza el header de la aplicación.
+ *
+ * El header incluye:
+ * - Un enlace a la página de inicio
+ * - Un enlace a la página de galería
+ * - Un dropdown con los modelos de IA disponibles
+ * - Un botón para mostrar/ocultar el menú en dispositivos móviles
+ *
+ * @returns {JSX.Element} El componente del header.
+ */
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isModelsOpen, setIsModelsOpen] = useState(false);
-  const menuRef = useRef(null);
-  const modelsMenuRef = useRef(null);
-  const buttonRef = useRef(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const modelsMenuRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   const closeMenu = useCallback(() => {
     setIsOpen(false);
     setIsModelsOpen(false);
   }, []);
 
-  const handleClickOutside = useCallback((event) => {
+
+  const handleClickOutside = useCallback((event: MouseEvent) => {
     if (
-      menuRef.current && !menuRef.current.contains(event.target) &&
-      buttonRef.current && !buttonRef.current.contains(event.target) &&
-      modelsMenuRef.current && !modelsMenuRef.current.contains(event.target)
+      menuRef.current && !menuRef.current.contains(event.target as Node) &&
+      buttonRef.current && !buttonRef.current.contains(event.target as Node) &&
+      modelsMenuRef.current && !modelsMenuRef.current.contains(event.target as Node)
     ) {
       closeMenu();
     }

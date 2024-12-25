@@ -2,7 +2,23 @@ import React from 'react';
 import { Github, Linkedin, Mail, Code2, Dumbbell, Brain } from 'lucide-react';
 import foto from '../assets/yo.jpg';
 
-const AboutMe = () => {
+
+
+
+/**
+ * Componente que muestra información sobre el autor, incluyendo
+ * una imagen de perfil, descripciones personales, intereses y
+ * enlaces a redes sociales.
+ *
+ * El componente también destaca las habilidades y áreas de interés
+ * del autor, como programación, inteligencia artificial y deporte,
+ * utilizando iconos y tarjetas informativas.
+ *
+ * @returns {React.ReactElement} Un elemento JSX que representa la
+ * sección "Sobre mí" del autor.
+ */
+
+const AboutMe = (): React.ReactElement => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
