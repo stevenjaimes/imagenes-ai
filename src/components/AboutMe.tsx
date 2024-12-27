@@ -2,9 +2,6 @@ import React from 'react';
 import { Github, Linkedin, Mail, Code2, Dumbbell, Brain } from 'lucide-react';
 import foto from '../assets/yo.jpg';
 
-
-
-
 /**
  * Componente que muestra información sobre el autor, incluyendo
  * una imagen de perfil, descripciones personales, intereses y
@@ -78,13 +75,13 @@ const AboutMe = (): React.ReactElement => {
 
             {/* Social Links */}
             <div className="flex justify-center gap-6 mt-8 pt-8 border-t">
-              <a href="#" className="text-gray-600 hover:text-purple-600 transition-colors">
+              <a href="https://github.com/stevenjaimes/imagenes-ai" className="text-gray-600 hover:text-purple-600 transition-colors">
                 <Github className="w-6 h-6" />
               </a>
-              <a href="#" className="text-gray-600 hover:text-purple-600 transition-colors">
+              <a href="https://www.linkedin.com/in/henry-steven-jaimes/" className="text-gray-600 hover:text-purple-600 transition-colors">
                 <Linkedin className="w-6 h-6" />
               </a>
-              <a href="#" className="text-gray-600 hover:text-purple-600 transition-colors">
+              <a href="hensteve250@gmail.com" className="text-gray-600 hover:text-purple-600 transition-colors">
                 <Mail className="w-6 h-6" />
               </a>
             </div>

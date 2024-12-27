@@ -3,6 +3,17 @@ import { AccordionItem } from './AccordionItem';
 import { termsContent } from './TermsContent';
 import { Scroll } from 'lucide-react';
 
+/**
+ * Componente que renderiza los términos y condiciones de uso de la aplicación.
+ * Este componente se encarga de mostrar los términos y condiciones de uso en una
+ * página con diseño de acordeón.
+ *
+ * Se utiliza el componente `AccordionItem` para mostrar cada sección de los
+ * términos y condiciones de uso. El contenido de cada sección se almacena en la
+ * variable `termsContent` y se itera para mostrar cada sección.
+ *
+ * @returns {JSX.Element} Un JSX con el contenido de los términos y condiciones de uso.
+ */
 const TermsAndConditions: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-50 py-12 px-4 sm:px-6 lg:px-8">

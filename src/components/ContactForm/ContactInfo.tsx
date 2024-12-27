@@ -76,7 +76,7 @@ export const ContactInfo = () => {
             label="LinkedIn"
           />
           <SocialLink
-            href="https://github.com/stevenjaimes"
+            href="https://github.com/stevenjaimes/imagenes-ai"
             icon={<Github className="w-4 h-4" />}
             label="GitHub"
           />
