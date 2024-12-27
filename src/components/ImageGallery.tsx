@@ -139,6 +139,10 @@ const ImageGallery = (): React.ReactElement => {
               <img
                 src={image.url}
                 alt={`Imagen ${image.id}`}
+                width={400}
+                height={400}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">

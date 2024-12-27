@@ -2,7 +2,6 @@ import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Layout from './components/Layout';
 import modelConfigs from './config/models.json';
 import { ModelConfig } from './types/types';
 
@@ -13,7 +12,7 @@ const ImageGenerator = React.lazy(() => import('./components/ImageGenerator'));
 const AboutMe = React.lazy(() => import('./components/AboutMe'));
 const ContactForm = React.lazy(() => import('./components/ContactForm/ContactForm'));
 const TermsAndConditions = React.lazy(() => import('./components/TermsAndConditions/TermnsAndConditions'));
-
+const Layout = React.lazy(() => import('./components/Layout'));
 /**
  * Componente principal de la aplicación.
  *
@@ -31,7 +30,7 @@ const App = (): React.ReactElement => {
         <main className="flex-grow">
           <Suspense
             fallback={
-              <div className="flex items-center justify-center min-h-[60vh]">
+              <div className="flex items-center justify-center">
                 <p>Cargando...</p>
               </div>
             }
@@ -97,7 +96,7 @@ const App = (): React.ReactElement => {
                 element={
                   <Layout>
                     <div className="flex items-center justify-center min-h-[60vh]">
-                      <div className="text-center p-8 bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl">
+                      <div className="text-center p-8 bg-white/80 rounded-2xl shadow-xl">
                         <h2 className="text-2xl font-bold text-gray-800 mb-4">
                           Ruta no encontrada
                         </h2>
