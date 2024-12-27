@@ -30,11 +30,15 @@ const App = (): React.ReactElement => {
         <main className="flex-grow min-h-[90vh]">
           <Suspense
             fallback={
-              <div className="flex items-center justify-center">
-                <p>Cargando...</p>
+              <div className="flex items-center justify-center min-h-[60vh]">
+                <div className="flex flex-col items-center gap-4">
+                  <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500 border-solid"></div>
+                  <p className="text-lg text-gray-700 font-medium">Cargando...</p>
+                </div>
               </div>
             }
           >
+
             <Routes>
               <Route
                 path="/imagenes-creadas"
