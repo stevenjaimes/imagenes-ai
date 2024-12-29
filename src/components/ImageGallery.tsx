@@ -92,7 +92,7 @@ const ImageGallery = (): React.ReactElement => {
           <p className="text-lg text-gray-500">No se han generado imágenes aún.</p>
         </div>
       ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {images.map((image) => (
             <div
               key={image.id}
@@ -106,7 +106,7 @@ const ImageGallery = (): React.ReactElement => {
                 decoding="async"
                 width={300}
                 height = {300}
-                className="w-auto h-auto object-contain transition-transform duration-300 group-hover:scale-110"
+                className="w-[300px] h-[300px] object-cover transition-transform duration-300 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                 <span className="text-white text-sm font-medium">Ver detalles</span>
