@@ -3,7 +3,7 @@ import { Image } from "lucide-react";
 import { getImagesFromDB, deleteImageFromDB } from "../config/indexedDBUtils";
 import ImageModal from "./ImageModal";
 import { createThumbnail } from "../utils/thumbnailUtils"; // Importa tu función aquí
-import { StoredImage, CustomImageData } from "../types/types";
+import { CustomImageData } from "../types/types";
 
 // Cache global de URLs
 const imageCache = new Map<string, { thumbnail: string; original: string }>();
@@ -20,21 +20,18 @@ const ImageGallery = (): React.ReactElement => {
 
         // Procesar las imágenes
         const imageData = await Promise.all(
-          storedImages.map(async (record: StoredImage) => {
+          storedImages.map(async (record) => {
             let cached = imageCache.get(record.id);
-
+        
             if (!cached) {
               const originalUrl = URL.createObjectURL(record.blob);
-              const thumbnailUrl = await createThumbnail(
-                record.blob,
-                300, // Ancho del thumbnail
-                300 // Alto del thumbnail
-              );
-
+              const thumbnailBlob = await createThumbnail(record.blob, 300, 300); // Obtén el Blob
+              const thumbnailUrl = URL.createObjectURL(thumbnailBlob); // Genera URL para el Blob
+        
               cached = { original: originalUrl, thumbnail: thumbnailUrl };
               imageCache.set(record.id, cached);
             }
-
+        
             return {
               id: record.id,
               url: cached.original,
@@ -43,7 +40,6 @@ const ImageGallery = (): React.ReactElement => {
             };
           })
         );
-
         setImages(imageData);
       } catch (err) {
         console.error("Error al cargar imágenes de IndexedDB:", err);
