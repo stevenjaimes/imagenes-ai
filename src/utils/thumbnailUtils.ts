@@ -4,7 +4,7 @@ export const createThumbnail = async (
     width: number,
     height: number,
     mimeType: string = 'image/webp', // Tipo MIME por defecto
-    quality: number = 0.9 // Calidad por defecto
+    quality: number = 1.0 // Calidad por defecto
   ): Promise<Blob> => {
     return new Promise((resolve, reject) => {
       const img = new Image();

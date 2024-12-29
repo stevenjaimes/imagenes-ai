@@ -25,7 +25,7 @@ const ImageGallery = (): React.ReactElement => {
         
             if (!cached) {
               const originalUrl = URL.createObjectURL(record.blob);
-              const thumbnailBlob = await createThumbnail(record.blob, 250, 250); // Obtén el Blob
+              const thumbnailBlob = await createThumbnail(record.blob, 280, 280); // Obtén el Blob
               const thumbnailUrl = URL.createObjectURL(thumbnailBlob); // Genera URL para el Blob
         
               cached = { original: originalUrl, thumbnail: thumbnailUrl };
@@ -104,8 +104,8 @@ const ImageGallery = (): React.ReactElement => {
                 alt={`Imagen ${image.id}`}
                 loading="lazy"
                 decoding="async"
-                width={250}
-                height = {250}
+                width={280}
+                height = {280}
                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
