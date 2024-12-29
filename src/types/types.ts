@@ -2,6 +2,7 @@ export interface CustomImageData {
   id: string;
   url: string;
   blob?: Blob;
+  thumbnailUrl: string;
 }
 
  export type StoredImage = {

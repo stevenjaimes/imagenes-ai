@@ -1,6 +1,6 @@
 export interface ImageData {
   id: string;
-  url: string;
   blob?: Blob;
+  url: string;  
+  thumbnailUrl: string;
 }
-

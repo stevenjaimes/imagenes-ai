@@ -1,18 +1,16 @@
 import React from 'react';
 import { Download, Trash2 } from 'lucide-react';
-import { ImageData } from '../types';
+import { CustomImageData } from '../types/types';
 import Modal from './Modal';
 
 interface ImageModalProps {
-  image: ImageData;
+  image: CustomImageData;
   isOpen: boolean;
   onClose: () => void;
-  onDownload: (image: ImageData) => void;
+  onDownload: (image: CustomImageData) => void;
   onDelete: (imageId: string) => void;
 }
 
-
-/* quiero que documente las props no los tipos de datos */
 
 const ImageModal: React.FC<ImageModalProps> = ({
   image,
